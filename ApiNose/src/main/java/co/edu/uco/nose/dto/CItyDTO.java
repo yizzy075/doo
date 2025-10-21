@@ -1,26 +1,27 @@
 package co.edu.uco.nose.dto;
 
-public class CountryDTO {
-
-
+public class CItyDTO {
 
     private UUID id;
     private String name;
+    private StateDTO state;
 
-    public CountryDTO() {
+    public CityDTO() {
         super();
         this.id = UUID.randomUUID();
         this.name = "";
+        this.state = new StateDTO();
     }
 
-    public CountryDTO(UUID id, String name) {
+    public CityDTO(UUID id, String name, StateDTO state) {
         super();
         this.id = id;
         this.name = name;
+        this.state = state;
     }
 
-    public static CountryDTO build() {
-        return new CountryDTO();
+    public static CityDTO build() {
+        return new CityDTO();
     }
 
     public UUID getId() {
@@ -37,5 +38,13 @@ public class CountryDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public StateDTO getState() {
+        return state;
+    }
+
+    public void setState(StateDTO state) {
+        this.state = state;
     }
 }

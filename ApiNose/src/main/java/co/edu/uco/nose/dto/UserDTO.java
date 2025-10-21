@@ -2,59 +2,153 @@ package co.edu.uco.nose.dto;
 
 import java.util.UUID;
 
-import co.edu.uco.nose.crosscuting.helper.TextHelper;
-import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
+public class UserDTO {
 
-public class UserDTO extends DTO{
-	
-	private String name;
-	private String lastName;
-	private String identification;
-	
-	public UserDTO() {
-		super(UUIDHelper.getUUIDHelper().getDefault());
-		setName(TextHelper.getDefault());
-		setLastName(TextHelper.getDefault());
-		setIdentification(TextHelper.getDefault());
-	}
-	
-	public UserDTO(final UUID id) {
-		super(id);
-		setName(TextHelper.getDefault());
-	    setLastName(TextHelper.getDefault());
-	    setIdentification(TextHelper.getDefault());
-	}
+    private UUID id;
+    private String firstName;
+    private String secondName;
+    private String firstLastName;
+    private String secondLastName;
+    private String identification;
+    private CityDTO residenceCity;
+    private IdTypeDTO idType;
+    private String email;
+    private String phoneNumber;
+    private boolean emailConfirmed;
+    private boolean mobileNumberConfirmed;
 
-	
-	public UserDTO(final UUID id,final String name) {
-		super(id);
-		this.name = name;
-	}
+    public UserDTO() {
+        super();
+        this.id = UUID.randomUUID();
+        this.firstName = "";
+        this.secondName = "";
+        this.firstLastName = "";
+        this.secondLastName = "";
+        this.identification = "";
+        this.residenceCity = new CityDTO();
+        this.idType = new IdTypeDTO();
+        this.email = "";
+        this.phoneNumber = "";
+        this.emailConfirmed = false;
+        this.mobileNumberConfirmed = false;
+    }
 
-	
+    public UserDTO(UUID id, String firstName, String secondName, String firstLastName, String secondLastName,
+                   String identification, CityDTO residenceCity, IdTypeDTO idType, String email,
+                   String phoneNumber, boolean emailConfirmed, boolean mobileNumberConfirmed) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.firstLastName = firstLastName;
+        this.secondLastName = secondLastName;
+        this.identification = identification;
+        this.residenceCity = residenceCity;
+        this.idType = idType;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.emailConfirmed = emailConfirmed;
+        this.mobileNumberConfirmed = mobileNumberConfirmed;
+    }
 
+    public static UserDTO build() {
+        return new UserDTO();
+    }
 
-	public String getName() {
-		return name;
-	}
+    // Getters y Setters
 
-	public void setName(final String lastName) {
-		this.lastName = TextHelper.getDefaultWithTrim(lastName);
-	}
+    public UUID getId() {
+        return id;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
-	public void setLastName(final String lastname) {
-		this.lastName = TextHelper.getDefaultWithTrim(lastname);
-	}
-	
-	public String getIdentification() {
-		return identification;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setIdentification(final String identification) {
-		this.identification = TextHelper.getDefaultWithTrim(identification);
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getFirstLastName() {
+        return firstLastName;
+    }
+
+    public void setFirstLastName(String firstLastName) {
+        this.firstLastName = firstLastName;
+    }
+
+    public String getSecondLastName() {
+        return secondLastName;
+    }
+
+    public void setSecondLastName(String secondLastName) {
+        this.secondLastName = secondLastName;
+    }
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
+
+    public CityDTO getResidenceCity() {
+        return residenceCity;
+    }
+
+    public void setResidenceCity(CityDTO residenceCity) {
+        this.residenceCity = residenceCity;
+    }
+
+    public IdTypeDTO getIdType() {
+        return idType;
+    }
+
+    public void setIdType(IdTypeDTO idType) {
+        this.idType = idType;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isEmailConfirmed() {
+        return emailConfirmed;
+    }
+
+    public void setEmailConfirmed(boolean emailConfirmed) {
+        this.emailConfirmed = emailConfirmed;
+    }
+
+    public boolean isMobileNumberConfirmed() {
+        return mobileNumberConfirmed;
+    }
+
+    public void setMobileNumberConfirmed(boolean mobileNumberConfirmed) {
+        this.mobileNumberConfirmed = mobileNumberConfirmed;
+    }
 }
