@@ -1,50 +1,39 @@
 package co.edu.uco.nose.dto;
 
-public class CItyDTO {
+import java.util.UUID;
 
-    private UUID id;
-    private String name;
-    private StateDTO state;
+import co.edu.uco.nose.crosscuting.helper.TextHelper;
+import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 
-    public CityDTO() {
-        super();
-        this.id = UUID.randomUUID();
-        this.name = "";
-        this.state = new StateDTO();
-    }
+public class CityDTO extends DTO{
+	
+	private String name;
+	
+	
+	
+	public CityDTO() {
+		super(UUIDHelper.getUUIDHelper().getDefault());
+		setName(TextHelper.getDefault());
+	}
 
-    public CityDTO(UUID id, String name, StateDTO state) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.state = state;
-    }
+	public CityDTO(final UUID id) {
+		super(id);
+		setName(TextHelper.getDefault());
+	}
+	
+	public CityDTO(final UUID id,final String name) {
+		super(id);
+		this.name = name;
+	}
 
-    public static CityDTO build() {
-        return new CityDTO();
-    }
+	
 
-    public UUID getId() {
-        return id;
-    }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public StateDTO getState() {
-        return state;
-    }
-
-    public void setState(StateDTO state) {
-        this.state = state;
-    }
+	public void setName(final String name) {
+		this.name = TextHelper.getDefaultWithTrim(name);
+	}
 }
