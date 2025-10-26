@@ -1,57 +1,67 @@
-
-package co.edu.uco.nose.entity;
+package co.edu.uco.nose.dto;
 
 import java.util.UUID;
 
-import co.edu.uco.nose.crosscuting.helper.TextHelper;
-import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
+public class UserDTO {
 
-public class UserEntity extends Entity {
-
+    private UUID id;
     private String firstName;
     private String secondName;
     private String firstLastName;
     private String secondLastName;
     private String identification;
-    private CityEntity residenceCity;
-    private IdTypeEntity idType;
+    private CityDTO residenceCity;
+    private IdTypeDTO idType;
     private String email;
     private String phoneNumber;
     private boolean emailConfirmed;
     private boolean mobileNumberConfirmed;
 
-    public UserEntity() {
-        super(UUIDHelper.getUUIDHelper().getDefault());
-        setFirstName(TextHelper.getDefault());
-        setSecondName(TextHelper.getDefault());
-        setFirstLastName(TextHelper.getDefault());
-        setSecondLastName(TextHelper.getDefault());
-        setIdentification(TextHelper.getDefault());
-        setResidenceCity(new CityEntity());
-        setIdType(new IdTypeEntity());
-        setEmail(TextHelper.getDefault());
-        setPhoneNumber(TextHelper.getDefault());
-        setEmailConfirmed(false);
-        setMobileNumberConfirmed(false);
+    public UserDTO() {
+        super();
+        this.id = UUID.randomUUID();
+        this.firstName = "";
+        this.secondName = "";
+        this.firstLastName = "";
+        this.secondLastName = "";
+        this.identification = "";
+        this.residenceCity = new CityDTO();
+        this.idType = new IdTypeDTO();
+        this.email = "";
+        this.phoneNumber = "";
+        this.emailConfirmed = false;
+        this.mobileNumberConfirmed = false;
     }
 
-    public UserEntity(final UUID id) {
-        super(id);
-        setFirstName(TextHelper.getDefault());
-        setSecondName(TextHelper.getDefault());
-        setFirstLastName(TextHelper.getDefault());
-        setSecondLastName(TextHelper.getDefault());
-        setIdentification(TextHelper.getDefault());
-        setResidenceCity(new CityEntity());
-        setIdType(new IdTypeEntity());
-        setEmail(TextHelper.getDefault());
-        setPhoneNumber(TextHelper.getDefault());
-        setEmailConfirmed(false);
-        setMobileNumberConfirmed(false);
+    public UserDTO(UUID id, String firstName, String secondName, String firstLastName, String secondLastName,
+                   String identification, CityDTO residenceCity, IdTypeDTO idType, String email,
+                   String phoneNumber, boolean emailConfirmed, boolean mobileNumberConfirmed) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.firstLastName = firstLastName;
+        this.secondLastName = secondLastName;
+        this.identification = identification;
+        this.residenceCity = residenceCity;
+        this.idType = idType;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.emailConfirmed = emailConfirmed;
+        this.mobileNumberConfirmed = mobileNumberConfirmed;
     }
 
-    public static final UserEntity build() {
-        return new UserEntity();
+    public static UserDTO build() {
+        return new UserDTO();
+    }
+
+    // Getters y Setters
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -94,19 +104,19 @@ public class UserEntity extends Entity {
         this.identification = identification;
     }
 
-    public CityEntity getResidenceCity() {
+    public CityDTO getResidenceCity() {
         return residenceCity;
     }
 
-    public void setResidenceCity(CityEntity residenceCity) {
+    public void setResidenceCity(CityDTO residenceCity) {
         this.residenceCity = residenceCity;
     }
 
-    public IdTypeEntity getIdType() {
+    public IdTypeDTO getIdType() {
         return idType;
     }
 
-    public void setIdType(IdTypeEntity idType) {
+    public void setIdType(IdTypeDTO idType) {
         this.idType = idType;
     }
 
@@ -116,7 +126,6 @@ public class UserEntity extends Entity {
 
     public void setEmail(String email) {
         this.email = email;
-        setEmailConfirmed(false);
     }
 
     public String getPhoneNumber() {
@@ -135,7 +144,7 @@ public class UserEntity extends Entity {
         this.emailConfirmed = emailConfirmed;
     }
 
-    public boolean isPhoneNumberConfirmed() {
+    public boolean isMobileNumberConfirmed() {
         return mobileNumberConfirmed;
     }
 
