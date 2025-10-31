@@ -2,22 +2,27 @@ package co.edu.uco.nose.business.domain;
 
 import java.util.UUID;
 
-import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
+import co.edu.uco.nose.crosscuting.helpers.UUIDHelper;
 
-class Domain {
-
+class Domain 
+{
 	private UUID id;
-
-	protected Domain(final UUID id) {
+	
+	protected Domain(final UUID id) 
+	{
 		setId(id);
 	}
 
-	public UUID getId() {
+	public UUID getId() 
+	{
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(UUID id) 
+	{
 		this.id = UUIDHelper.getUUIDHelper().getDefault(id);
-		
-		}
+	}
+	
+	
+
 }

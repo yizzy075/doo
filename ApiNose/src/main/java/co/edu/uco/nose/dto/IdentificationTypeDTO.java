@@ -1,46 +1,40 @@
-package co.edu.uco.nose.entity;
+package co.edu.uco.nose.dto;
+
+import java.util.UUID;
 
 import co.edu.uco.nose.crosscuting.helpers.TextHelper;
 import co.edu.uco.nose.crosscuting.helpers.UUIDHelper;
 
-import java.util.UUID;
-
-public final class CountryEntity {
+public final class IdentificationTypeDTO {
     private UUID id;
     private String name;
-    public static final CountryEntity DEFAULT = new CountryEntity();
-    public static CountryEntity getDefaultObject() {
+    public static final IdentificationTypeDTO DEFAULT = new IdentificationTypeDTO();
+    public static IdentificationTypeDTO getDefaultObject() {
         return DEFAULT;
     }
-
-    public CountryEntity() {
+    public IdentificationTypeDTO() {
         setId(UUIDHelper.getUUIDHelper().getDefault());
         setName(TextHelper.getDefault());
     }
-
-    public CountryEntity(final UUID id) {
+    public IdentificationTypeDTO(final UUID id) {
         setId(id);
         setName(TextHelper.getDefault());
     }
-
-    public CountryEntity(final UUID id, final String name) {
+    public IdentificationTypeDTO(final UUID id, final String name) {
         setId(id);
         setName(name);
     }
-
     public UUID getId() {
         return id;
     }
-
     public void setId(final UUID id) {
         this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(final String name) {
         this.name = TextHelper.getDefaultWithTrim(name);
     }
+
 }
