@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.helper.SqlConnectionHelper;
 import co.edu.uco.nose.crosscuting.messagecatalog.MessagesEnum;
@@ -41,8 +42,7 @@ public final class CityPostgreSqlDAO extends SqlConnection implements CityDAO{
             while (resultSet.next()) {
                 var city = new CityEntity(
                         (UUID) resultSet.getObject("id"),
-                        resultSet.getString("name"),
-                        new StateEntity((UUID) resultSet.getObject("state_id"), null, null)
+                        new StateEntity((UUID) resultSet.getObject("state_id"), null, null), resultSet.getString("name")
                 );
                 cities.add(city);
             }
@@ -50,22 +50,21 @@ public final class CityPostgreSqlDAO extends SqlConnection implements CityDAO{
             return cities;
 
         } catch (final SQLException exception) {
-            throw new NoseException(
+            throw NoseException.create(exception,
                     MessagesEnum.CITY_ERROR_FIND_ALL_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_SQL_CITY.getContent(),
-                    (SQLException) exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_SQL_CITY.getContent()
             );
         } catch (final Exception exception) {
-            throw new NoseException(
+            throw NoseException.create(exception,
                     MessagesEnum.CITY_ERROR_FIND_ALL_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_UNEXPECTED_CITY.getContent(),
-                    (SQLException) exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_UNEXPECTED_CITY.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw new NoseException(
+            throw NoseException.create(exception,
                     MessagesEnum.CITY_ERROR_FIND_ALL_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_CRITICAL_CITY.getContent(),
-                    (SQLException) exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_CRITICAL_CITY.getContent()
+
             );
         }
     }
@@ -119,8 +118,7 @@ public final class CityPostgreSqlDAO extends SqlConnection implements CityDAO{
                 while (resultSet.next()) {
                     var city = new CityEntity(
                             (UUID) resultSet.getObject("id"),
-                            resultSet.getString("name"),
-                            new StateEntity((UUID) resultSet.getObject("state_id"), null, null)
+                            new StateEntity((UUID) resultSet.getObject("state_id"), null, null), resultSet.getString("name")
                     );
                     cities.add(city);
                 }
@@ -128,26 +126,23 @@ public final class CityPostgreSqlDAO extends SqlConnection implements CityDAO{
             }
 
         } catch (final SQLException exception) {
-            throw new NoseException(
+            throw NoseException.create(exception,
                     MessagesEnum.CITY_ERROR_FIND_BY_FILTER_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL_CITY.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL_CITY.getContent()
+
             );
         } catch (final Exception exception) {
-            throw new NoseException(
+            throw NoseException.create(exception,
                     MessagesEnum.CITY_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED_CITY.getContent(),
-                    (SQLException) exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED_CITY.getContent()
             );
-        } catch (final Throwable exception) {
-            throw new NoseException(
+        }catch (final Throwable exception) {
+            throw NoseException.create(exception,
                     MessagesEnum.CITY_ERROR_FIND_BY_FILTER_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL_CITY.getContent(),
-                    (SQLException) exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL_CITY.getContent()
             );
         }
-    }
-
+        }
 
     @Override
     public CityEntity findById(final UUID id) {
@@ -165,29 +160,27 @@ public final class CityPostgreSqlDAO extends SqlConnection implements CityDAO{
             if (resultSet.next()) {
                 return new CityEntity(
                         (UUID) resultSet.getObject("id"),
-                        resultSet.getString("name"),
-                        new StateEntity((UUID) resultSet.getObject("state_id"), null, null)
+                        new StateEntity((UUID) resultSet.getObject("state_id"), null, null), resultSet.getString("name")
                 );
             }
             return null;
 
         } catch (final SQLException exception) {
-            throw new NoseException(
+            throw NoseException.create(
+                    exception,
                     MessagesEnum.CITY_ERROR_FIND_BY_ID_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL_CITY.getContent(),
-                    (SQLException) exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL_CITY.getContent()
             );
         } catch (final Exception exception) {
-            throw new NoseException(
+            throw NoseException.create(exception,
                     MessagesEnum.CITY_ERROR_FIND_BY_ID_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED_CITY.getContent(),
-                    (SQLException) exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED_CITY.getContent()
             );
         } catch (final Throwable exception) {
-            throw new NoseException(
+            throw NoseException.create(exception,
                     MessagesEnum.CITY_ERROR_FIND_BY_ID_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL_CITY.getContent(),
-                    (SQLException) exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL_CITY.getContent()
+
             );
         }
     }
