@@ -4,10 +4,10 @@ import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 import co.edu.uco.nose.crosscuting.helper.TextHelper;
 
-public class StringValueIsPresentRule implements Rule {
+public final class StringValueIsPresentRule implements Rule {
     @Override
     public void execute(final Object... data) {
-        if (ObjectHelper.isNull(data)) {
+        if (ObjectHelper.isNull(data))  {
             var userMessage = "Se ha presentado un problema inesperado tratando de llevar a cabo la operacion deseada....";
             var technicalMessage = "No se recibieron los parametros requeridos para ejecutar la regla stringValueIsPresentRule";
             throw NoseException.create(userMessage, technicalMessage);
@@ -23,6 +23,15 @@ public class StringValueIsPresentRule implements Rule {
 
         var stringData = (String) data[0];
         var dataName = (String) data[1];
-        var mustApplyTrim = (boolean) data[2];
+        boolean mustApplyTrim = (boolean) data[2];
+
+        if((mustApplyTrim)
+                ? TextHelper.isEmptyWithTrim(stringData)
+                : TextHelper.isEmpty(stringData)) {
+            var userMessage = "El dato[".concat(dataName).concat("] es requerido para llevar a cabo la operacion");
+            var technicalMessage = "La regla StringValueIsPresentRule fallo porque el dato [" .concat(dataName).concat("]requerido para llevar a cabo la operacion esta vacio... ");
+            throw NoseException.create(userMessage, technicalMessage);
+
+        }
     }
 }
