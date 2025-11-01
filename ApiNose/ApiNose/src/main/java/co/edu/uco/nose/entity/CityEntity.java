@@ -2,6 +2,10 @@ package co.edu.uco.nose.entity;
 
 import java.util.UUID;
 
+import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
+import co.edu.uco.nose.crosscuting.helper.TextHelper;
+import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
+
 public final class CityEntity {
 
     private UUID id;
@@ -9,20 +13,29 @@ public final class CityEntity {
     private String name;
 
     public CityEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setState(new StateEntity());
+        setName(TextHelper.getDefault());
+    }
+
+    public CityEntity(final UUID id) {
+        setId(id);
+        setState(new StateEntity());
+        setName(TextHelper.getDefault());
     }
 
     public CityEntity(final UUID id, final StateEntity state, final String name) {
-        this.id = id;
-        this.state = state;
-        this.name = name;
+        setId(id);
+        setState(state);
+        setName(name);
     }
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(final UUID id) {
-        this.id = id;
+    public void setId(UUID id) {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
     public StateEntity getState() {
@@ -30,7 +43,7 @@ public final class CityEntity {
     }
 
     public void setState(final StateEntity state) {
-        this.state = state;
+        this.state = ObjectHelper.getDefault(state, new StateEntity());
     }
 
     public String getName() {
@@ -38,6 +51,6 @@ public final class CityEntity {
     }
 
     public void setName(final String name) {
-        this.name = name;
+        this.name = TextHelper.getDefaultWithTrim(name);
     }
 }

@@ -1,45 +1,27 @@
- package co.edu.uco.nose.data.dao.entity;
-
-import co.edu.uco.nose.crosscuting.exception.NoseException;
-import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
-import co.edu.uco.nose.crosscuting.messagecatalog.MessagesEnum;
+package co.edu.uco.nose.data.dao.entity;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
- public abstract class SqlConnection {
+import co.edu.uco.nose.crosscuting.helper.SqlConnectionHelper;
 
-	private Connection connection;
 
-	protected SqlConnection(final Connection connection) {
-		setConnection(connection);
+public abstract class SqlConnection {
 
-	}
+    private Connection connection;
 
-	protected Connection getConnection() {
-		return connection;
-	}
+    protected SqlConnection(Connection connection2) {
+        setConnection(connection2);
+    }
 
-	private void setConnection(final Connection connection) {
-		if (ObjectHelper.IsNull(connection)) {
-			var userMessage = MessagesEnum.USER_ERROR_SQL_CONNECTION_IS_EMPTY.getContent();
-            var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_CONNECTION_IS_EMPTY.getContent();
-			throw NoseException.create(userMessage, technicalMessage);
-		}
-        try {
-            if(connection.isClosed()){
-                var userMessage = MessagesEnum.USER_ERROR_SQL_CONNECTION_IS_CLOSED.getContent();
-                var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_CONNECTION_IS_CLOSED.getContent();
-                throw NoseException.create(userMessage, technicalMessage);
+    public Connection getConnection() {
+        return connection;
+    }
 
-            }
-            } catch (final SQLException exception) {
-            var userMessage = MessagesEnum.USER_ERROR_SQL_CONNECTION_IS_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS.getContent();
-            var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_CONNECTION_IS_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS.getContent();
-            throw NoseException.create(exception, userMessage, technicalMessage);
-            }
+    private void setConnection(Connection connection) {
+        SqlConnectionHelper.ensureConnectionIsOpen(connection);
         this.connection = connection;
-        }
+    }
 
-	}
 
+
+}

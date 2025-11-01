@@ -1,15 +1,15 @@
 package co.edu.uco.nose.crosscuting.helper;
 
 public final class ObjectHelper {
-	private ObjectHelper() {
 
-	}
+    private ObjectHelper() {
+    }
 
-	public static <O> boolean IsNull(O object) {
-		return object == null;
-	}
+    public static <O> boolean isNull(final O object) {
+        return object == null;
+    }
 
-	public static <O> O getDefault(O object, final O defaultValue) {
-		return IsNull(object) ? defaultValue : object;
-	}
+    public static <O> O getDefault(final O object, final O defaultValue) {
+        return isNull(object) ? defaultValue : object;
+    }
 }

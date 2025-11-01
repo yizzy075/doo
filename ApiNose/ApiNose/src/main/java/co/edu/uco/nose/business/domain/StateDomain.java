@@ -1,6 +1,8 @@
 package co.edu.uco.nose.business.domain;
 
 import java.util.UUID;
+
+import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 import co.edu.uco.nose.crosscuting.helper.TextHelper;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 
@@ -16,9 +18,15 @@ public final class StateDomain extends Domain {
     }
 
     public StateDomain(final UUID id, final CountryDomain country, final String name) {
-        super(UUIDHelper.getUUIDHelper().getDefault(id));
+        super(id);
         setCountry(country);
         setName(name);
+    }
+
+    public StateDomain(final UUID id) {
+        super(id);
+        setName(TextHelper.getDefault());
+        setCountry(new CountryDomain());
     }
 
     public String getName() {
@@ -34,6 +42,6 @@ public final class StateDomain extends Domain {
     }
 
     public void setCountry(final CountryDomain country) {
-        this.country = (country == null) ? new CountryDomain() : country;
+        this.country = ObjectHelper.getDefault(country, new CountryDomain());
     }
 }
