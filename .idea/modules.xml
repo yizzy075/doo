@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/doo.iml" filepath="$PROJECT_DIR$/.idea/doo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ApiNose/api-nose.iml" filepath="$PROJECT_DIR$/ApiNose/api-nose.iml" />
     </modules>
   </component>
 </project>
