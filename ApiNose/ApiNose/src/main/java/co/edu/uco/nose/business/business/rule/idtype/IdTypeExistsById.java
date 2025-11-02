@@ -20,7 +20,7 @@ public final class IdTypeExistsById implements Rule {
             var userMessage = "El tipo de identificacion deseado no existe....";
             var technicalMessage = "El tipo de identificacion con id ["
                     .concat(id.toString()).concat("] no existe....");
-            throw NoseException.create(userMessage, technicalMessage);
+            throw NoseException.create(userMessage, technicalMessage);  
         }
     }
 }
