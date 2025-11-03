@@ -3,12 +3,14 @@ package co.edu.uco.nose.business.business.impl;
 import co.edu.uco.nose.business.assembler.entity.impl.UserEntityAssembler;
 import co.edu.uco.nose.business.business.UserBusiness;
 import co.edu.uco.nose.business.business.validator.ValidateDataUserConsistencyForRegisterNewInformation;
+import co.edu.uco.nose.business.business.validator.idtype.ValidateIdTypeExistsById;
 import co.edu.uco.nose.business.domain.UserDomain;
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 import co.edu.uco.nose.data.factory.DAOFactory;
 import co.edu.uco.nose.entity.IdTypeEntity;
 import co.edu.uco.nose.entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,12 +32,30 @@ public final  class UserBusinessImpl implements UserBusiness {
         //longitud, obligatoriedad, formato, rango, reglas propias del objeto
         ValidateDataUserConsistencyForRegisterNewInformation.executeValidation(userDomain);
 
-        var id = UUIDHelper.getUUIDHelper().generateNewUUID();
+        // 2. Validar que exista tipo de identificacion
+        ValidateIdTypeExistsById.executeValidation(userDomain.getIdType().getId(), daoFactory);
+
+
+
+        // 7. Ensamblar  objeto como Entity
         var userEntity = UserEntityAssembler.getUserEntityAssembler().toEntity(userDomain);
 
-        userEntity.setId(id);
+        // 8. Generar ID
+        userEntity.setId(generateId());
 
+        // 9. Registrar la informacion del nuevo usuario 
         daoFactory.getUserDAO().create(userEntity);
+    }
+
+    private UUID generateId() {
+        var id = UUIDHelper.getUUIDHelper().generateNewUUID();
+        var UserEntity = daoFactory.getUserDAO().findById(id);
+
+        while (!UUIDHelper.getUUIDHelper().isDefaultUUID(UserEntity.getId())) {
+            id = UUIDHelper.getUUIDHelper().generateNewUUID();
+            UserEntity  = daoFactory.getUserDAO().findById(id);
+        }
+        return id;
     }
 
     private void validateUserDomain(UserDomain user) {

@@ -2,6 +2,7 @@ package co.edu.uco.nose.business.business.rule.idtype;
 
 
 import co.edu.uco.nose.business.business.rule.Rule;
+import co.edu.uco.nose.business.business.rule.generics.StringLengthValueIsValidRule;
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 import co.edu.uco.nose.data.factory.DAOFactory;
@@ -9,6 +10,15 @@ import co.edu.uco.nose.data.factory.DAOFactory;
 import java.util.UUID;
 
 public final class IdTypeExistsByIdRule  implements Rule {
+    private static final Rule instance = new IdTypeExistsByIdRule();
+    private IdTypeExistsByIdRule() {
+
+    }
+
+    public static void executeRule(final Object... data) {
+        instance.execute(data);
+
+    }
     @Override
     public void execute(final Object...data) {
         var id = (UUID) data[0];
