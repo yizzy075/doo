@@ -6,6 +6,15 @@ import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 import co.edu.uco.nose.crosscuting.helper.TextHelper;
 
 public final class StringLengthValueIsValidRule implements Rule {
+    private static final Rule instance = new StringLengthValueIsValidRule();
+    private StringLengthValueIsValidRule() {
+
+    }
+
+    public static void executeRule(final Object... data) {
+        instance.execute(data);
+
+    }
 
     @Override
     public void execute(final Object... data) {

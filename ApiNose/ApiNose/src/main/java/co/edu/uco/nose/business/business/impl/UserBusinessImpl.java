@@ -2,6 +2,7 @@ package co.edu.uco.nose.business.business.impl;
 
 import co.edu.uco.nose.business.assembler.entity.impl.UserEntityAssembler;
 import co.edu.uco.nose.business.business.UserBusiness;
+import co.edu.uco.nose.business.business.validator.ValidateDataUserConsistencyForRegisterNewInformation;
 import co.edu.uco.nose.business.domain.UserDomain;
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
@@ -24,6 +25,10 @@ public final  class UserBusinessImpl implements UserBusiness {
 
     @Override
     public void registerNewUserInformation(UserDomain userDomain) {
+
+        // 1. Validar que la informacion sea consistente a nivel de Tipo de Dato,
+        //longitud, obligatoriedad, formato, rango, reglas propias del objeto
+        ValidateDataUserConsistencyForRegisterNewInformation.executeValidation(userDomain);
 
         var id = UUIDHelper.getUUIDHelper().generateNewUUID();
         var userEntity = UserEntityAssembler.getUserEntityAssembler().toEntity(userDomain);
