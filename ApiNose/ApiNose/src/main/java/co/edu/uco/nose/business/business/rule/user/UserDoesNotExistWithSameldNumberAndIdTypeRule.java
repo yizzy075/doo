@@ -8,7 +8,7 @@ import co.edu.uco.nose.data.factory.DAOFactory;
 
 import java.util.UUID;
 
-public final class UserExistsByIdRule implements Rule {
+public final class UserDoesNotExistWithSameldNumberAndIdTypeRule implements Rule {
     @Override
     public void execute(final Object...data) {
         var id = (UUID) data[0];

@@ -8,7 +8,7 @@ import co.edu.uco.nose.data.factory.DAOFactory;
 
 import java.util.UUID;
 
-public final class IdTypeExistsById implements Rule {
+public final class IdTypeExistsByIdRule  implements Rule {
     @Override
     public void execute(final Object...data) {
         var id = (UUID) data[0];
@@ -20,7 +20,7 @@ public final class IdTypeExistsById implements Rule {
             var userMessage = "El tipo de identificacion deseado no existe....";
             var technicalMessage = "El tipo de identificacion con id ["
                     .concat(id.toString()).concat("] no existe....");
-            throw NoseException.create(userMessage, technicalMessage);  
+            throw NoseException.create(userMessage, technicalMessage);
         }
     }
 }

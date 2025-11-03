@@ -1,4 +1,4 @@
-package co.edu.uco.nose.business.business.rule.user;
+package co.edu.uco.nose.business.business.rule.city;
 
 
 import co.edu.uco.nose.business.business.rule.Rule;
@@ -8,7 +8,7 @@ import co.edu.uco.nose.data.factory.DAOFactory;
 
 import java.util.UUID;
 
-public final class UserExistsByIdRule implements Rule {
+public final class CityExistsByIdRule implements Rule {
     @Override
     public void execute(final Object...data) {
         var id = (UUID) data[0];

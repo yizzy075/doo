@@ -5,6 +5,17 @@ import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 import co.edu.uco.nose.crosscuting.helper.TextHelper;
 
 public final class StringValueIsPresentRule implements Rule {
+
+    private static final Rule instance = new StringValueIsPresentRule();
+    private StringValueIsPresentRule() {
+
+    }
+
+    public static void executeRule(final Object... data) {
+        instance.execute(data);
+
+    }
+
     @Override
     public void execute(final Object... data) {
         if (ObjectHelper.isNull(data))  {
