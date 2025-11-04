@@ -31,17 +31,17 @@ public final class UserFacadeImpl implements UserFacade {
         }catch (final NoseException exception) {
             daoFactory.rollbackTransaction();
             throw exception;
+        } catch (RuntimeException e) {
+            daoFactory.rollbackTransaction();
+            throw NoseException.create(e,
+                    MessagesEnum.USER_ERROR_CRITICAL_CREATE.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_CREATE.getContent()
+            );
         } catch (final Exception exception) {
             daoFactory.rollbackTransaction();
             throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_UNEXPECTED_CREATE.getContent(),
                     MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_CREATE.getContent()
-            );
-        } catch (final Throwable exception) {
-            daoFactory.rollbackTransaction();
-            throw NoseException.create(exception,
-                    MessagesEnum.USER_ERROR_CRITICAL_CREATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_CREATE.getContent()
             );
         } finally {
             daoFactory.closeConnection();
@@ -122,8 +122,10 @@ public final class UserFacadeImpl implements UserFacade {
         var business = new UserBusinessImpl(daoFactory);
 
         try {
+            daoFactory.initTransaction();
             List<UserDomain> domainList = business.findAllUser();
             List<UserDTO> dtoList = UserDTOAssembler.getUserDTOAssembler().toDTO(domainList);
+            daoFactory.commitTransaction();
             return dtoList;
 
         } catch (final NoseException exception) {
@@ -178,22 +180,22 @@ public final class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void confirmMobileNumber(UUID userId, int confirmationCode) {
+    public void  confirmMobileNumber(UUID userId, int confirmationCode) { // Noncompliant - method is empty
 
     }
 
     @Override
-    public void confirmEmail(UUID userid, int confirmationCode) {
+    public void confirmEmail(UUID userid, int confirmationCode) {  // Noncompliant - method is empty
 
     }
 
     @Override
-    public void sendMobileNumberConfirmation(UUID userId) {
+    public void sendMobileNumberConfirmation(UUID userId) { // Noncompliant - method is empty
 
     }
 
     @Override
-    public void sendEmailConfirmation(UUID userId) {
+    public void sendEmailConfirmation(UUID userId) { // Noncompliant - method is empty
 
     }
 }

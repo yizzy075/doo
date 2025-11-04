@@ -59,4 +59,5 @@ public final class NoseException extends RuntimeException {
         this.technicalMessage = TextHelper.getDefaultWithTrim(technicalMessage);
     }
 
+
 }
