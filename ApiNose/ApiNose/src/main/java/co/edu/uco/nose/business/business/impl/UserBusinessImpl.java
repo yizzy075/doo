@@ -67,7 +67,7 @@ public final  class UserBusinessImpl implements UserBusiness {
         }
     }
 
-    private void checkUserUniqueness(UserDomain user) {
+    public void checkUserUniqueness(UserDomain user) {
         var userDAO = daoFactory.getUserDAO();
 
         // Tipo de identificación + número
@@ -171,23 +171,23 @@ public final  class UserBusinessImpl implements UserBusiness {
 
 
     @Override
-    public void confirmMobileNumber(UUID id, int confirmationCode) {
+    public void confirmMobileNumber(UUID id, int confirmationCode) { // La lógica de validación y confirmación móvil **aún no está implementada**.
 
 
     }
 
     @Override
-    public void confirmEmail(UUID id) {
+    public void confirmEmail(UUID id) { // La lógica del confirmación de correo
 
     }
 
     @Override
-    public void sendMobileNumberConfirmation(UUID id) {
+    public void sendMobileNumberConfirmation(UUID id) { // La lógica del confirmación del numero
 
     }
 
     @Override
-    public void sendEmailConfirmation(UUID id) {
+    public void sendEmailConfirmation(UUID id) { // EmailNotifier, pero la funcionalidad está deshabilitada en el entorno
 
     }
 }

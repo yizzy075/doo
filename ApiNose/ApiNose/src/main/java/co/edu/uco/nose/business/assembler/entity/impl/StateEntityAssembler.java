@@ -5,7 +5,6 @@ import co.edu.uco.nose.business.domain.StateDomain;
 import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 import co.edu.uco.nose.crosscuting.helper.TextHelper;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
-import co.edu.uco.nose.entity.CountryEntity;
 import co.edu.uco.nose.entity.StateEntity;
 
 public final class StateEntityAssembler implements EntityAssembler<StateEntity, StateDomain> {
