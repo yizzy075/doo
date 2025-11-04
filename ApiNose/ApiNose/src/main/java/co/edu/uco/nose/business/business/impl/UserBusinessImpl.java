@@ -2,7 +2,7 @@ package co.edu.uco.nose.business.business.impl;
 
 import co.edu.uco.nose.business.assembler.entity.impl.UserEntityAssembler;
 import co.edu.uco.nose.business.business.UserBusiness;
-import co.edu.uco.nose.business.business.validator.ValidateDataUserConsistencyForRegisterNewInformation;
+import co.edu.uco.nose.business.business.validator.user.ValidateDataUserConsistencyForRegisterNewInformation;
 import co.edu.uco.nose.business.business.validator.idtype.ValidateIdTypeExistsById;
 import co.edu.uco.nose.business.domain.UserDomain;
 import co.edu.uco.nose.crosscuting.exception.NoseException;
@@ -10,7 +10,6 @@ import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 import co.edu.uco.nose.data.factory.DAOFactory;
 import co.edu.uco.nose.entity.IdTypeEntity;
 import co.edu.uco.nose.entity.UserEntity;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.List;
 import java.util.UUID;

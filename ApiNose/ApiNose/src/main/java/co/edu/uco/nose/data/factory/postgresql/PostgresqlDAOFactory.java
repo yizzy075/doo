@@ -24,7 +24,7 @@ public final class PostgresqlDAOFactory extends DAOFactory {
 
     @Override
     protected void openConnection() {
-        final String url = "jdbc:postgresql://localhost:5432/classdoo";
+        final String url = "jdbc:postgresql://localhost:5432/classdoo?currentSchema=classdoo";
         final String user = "postgres";
         final String password = "dino2020";
 

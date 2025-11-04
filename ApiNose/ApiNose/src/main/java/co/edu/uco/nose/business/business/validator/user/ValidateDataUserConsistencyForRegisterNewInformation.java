@@ -1,8 +1,8 @@
-package co.edu.uco.nose.business.business.validator;
+package co.edu.uco.nose.business.business.validator.user;
 
-import co.edu.uco.nose.business.business.rule.Rule;
 import co.edu.uco.nose.business.business.rule.generics.StringLengthValueIsValidRule;
 import co.edu.uco.nose.business.business.rule.generics.StringValueIsPresentRule;
+import co.edu.uco.nose.business.business.validator.Validator;
 import co.edu.uco.nose.business.domain.UserDomain;
 import co.edu.uco.nose.crosscuting.helper.TextHelper;
 

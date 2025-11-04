@@ -1,7 +1,6 @@
 package co.edu.uco.nose.business.business.validator.idtype;
 
 import co.edu.uco.nose.business.business.rule.idtype.IdTypeExistsByIdRule;
-import co.edu.uco.nose.business.business.validator.ValidateDataUserConsistencyForRegisterNewInformation;
 import co.edu.uco.nose.business.business.validator.Validator;
 
 public class ValidateIdTypeExistsById implements Validator {
