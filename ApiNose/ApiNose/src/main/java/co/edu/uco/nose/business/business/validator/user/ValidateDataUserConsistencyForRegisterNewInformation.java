@@ -29,9 +29,9 @@ public class ValidateDataUserConsistencyForRegisterNewInformation implements Val
         // Valid data length
         validateDataLength(userDomainData);
 
-        // Valid data format
+        // Valid data format falta
 
-        // Valid data valid range
+        // Valid data valid range falta
     }
 
     private void validateEmptyData(final UserDomain data) {
