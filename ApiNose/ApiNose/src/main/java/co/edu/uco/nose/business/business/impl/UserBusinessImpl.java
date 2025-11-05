@@ -116,11 +116,28 @@ public final  class UserBusinessImpl implements UserBusiness {
             UserEntity userEntity = UserEntityAssembler.getUserEntityAssembler().toEntity(userDomain);
             userEntity.setId(id);
             daoFactory.getUserDAO().update(userEntity);
+
         } catch (Exception exception) {
-            throw NoseException.create(exception, TECHNICAL_ERROR_UNEXPECTED_UPDATE.getTitle(),
-                    TECHNICAL_ERROR_UNEXPECTED_UPDATE.getContent());
+            exception.printStackTrace();
+
+            // 👉 si el error es por validación, mostramos el mensaje real
+            if (exception instanceof IllegalArgumentException) {
+                throw NoseException.create(
+                        exception,
+                        "Error de validación al actualizar el usuario",
+                        exception.getMessage()
+                );
+            }
+
+            // 👉 si es otro tipo de error técnico, mostramos el genérico
+            throw NoseException.create(
+                    exception,
+                    TECHNICAL_ERROR_UNEXPECTED_UPDATE.getTitle(),
+                    TECHNICAL_ERROR_UNEXPECTED_UPDATE.getContent()
+            );
         }
     }
+
 
 
     @Override
